@@ -53,7 +53,7 @@ public class ServletCarrito extends HttpServlet {
 		out.println("<HEAD><TITLE>Tienda SDI: carrito</TITLE></HEAD>");
 		out.println("<BODY>");
 		out.println(carritoEnHTML(carrito) + "<br>");
-		out.println("<a href=\"tienda.html\">Volver</a></BODY></HTML>");
+		out.println("<a href=\"index.jsp\">Volver</a></BODY></HTML>");
 	}
 
 	private void insertarEnCarrito(Map<String, Integer> carrito, String claveProducto) {
