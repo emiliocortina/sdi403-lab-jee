@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ page language="java" import="com.uniovi.sdi.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -24,9 +25,50 @@
 		}
 	%>
 
+	<%
+		if (request.getParameter("nombre") != null && request.getParameter("imagen") != null
+				&& request.getParameter("precio") != null) {
+			String nombre = (String) request.getParameter("nombre");
+			String imagen = (String) request.getParameter("imagen");
+			float precio = Float.parseFloat(request.getParameter("precio"));
+			Producto producto = new Producto(nombre, imagen, precio);
+			new ProductosService().setNuevoProducto(producto);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
+	%>
+
 	<!-- Contenido -->
 	<div class="container" id="contenedor-principal">
-		<h2>Administrar</h2>
-	</div>
+		<h2>Agregar producto a la tienda</h2>
+		<form class="form-horizontal" method="post" action="admin.jsp">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="nombre">Nombre:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="nombre"
+						required="true" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="imagen">URL
+					imagen:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="imagen"
+						required="true" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="precio">Precio (€):</label>
+				<div class="col-sm-10">
+					 <input type="number" step="0.01" class="form-control"
+						name="precio">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">Agregar</button>
+				</div>
+			</div>
+
+		</form>
 </body>
 </html>
