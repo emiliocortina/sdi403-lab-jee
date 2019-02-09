@@ -25,13 +25,10 @@
 		}
 	%>
 
+	<jsp:useBean id="producto" class="com.uniovi.sdi.Producto" />
+	<jsp:setProperty name="producto" property="*" />
 	<%
-		if (request.getParameter("nombre") != null && request.getParameter("imagen") != null
-				&& request.getParameter("precio") != null) {
-			String nombre = (String) request.getParameter("nombre");
-			String imagen = (String) request.getParameter("imagen");
-			float precio = Float.parseFloat(request.getParameter("precio"));
-			Producto producto = new Producto(nombre, imagen, precio);
+		if (producto.getNombre() != null) {
 			new ProductosService().setNuevoProducto(producto);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
@@ -57,10 +54,10 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="precio">Precio (€):</label>
+				<label class="control-label col-sm-2" for="precio">Precio
+					(€):</label>
 				<div class="col-sm-10">
-					 <input type="number" step="0.01" class="form-control"
-						name="precio">
+					<input type="number" step="0.01" class="form-control" name="precio">
 				</div>
 			</div>
 			<div class="form-group">
